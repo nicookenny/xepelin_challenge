@@ -8,6 +8,7 @@ import { Transaction } from '../../../transaction/domain/entities/Transaction'
 import { Password } from './Password'
 
 interface UserProps {
+  name: string
   document: string
   password: Password
   account?: Account

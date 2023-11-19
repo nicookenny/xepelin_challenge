@@ -10,9 +10,9 @@ export class CreateUserController extends BaseController {
   }
 
   async exec(req: Request, res: Response) {
-    const { document, password } = req.body
+    const { document, password, name } = req.body
 
-    const result = await this.useCase.exec({ document, password })
+    const result = await this.useCase.exec({ document, password, name })
 
     if (result.isFailure) {
       return this.fail(res, result.getErrorValue() as string)

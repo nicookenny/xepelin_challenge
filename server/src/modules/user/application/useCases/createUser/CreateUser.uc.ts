@@ -23,6 +23,7 @@ export class CreateUserUseCase {
     const userOrError: Result<User> = User.create({
       password: Password.create({ value: hashed, hashed: true }).getValue()!,
       document: data.document,
+      name: data.name,
     })
 
     if (userOrError.isFailure) {
