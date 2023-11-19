@@ -32,8 +32,7 @@ export class Middlewares {
     next: NextFunction
   ) {
     const { amount, type } = req.body
-
-    if (+amount > 10000 && type === TransactionType.DEPOSIT) {
+    if (+amount > 10000 && type.toLowerCase() === TransactionType.DEPOSIT) {
       console.log('Se registró una transacción cun un importe mayor a $10.000')
     }
 

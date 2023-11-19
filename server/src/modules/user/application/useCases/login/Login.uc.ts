@@ -27,12 +27,16 @@ export class LoginUseCase {
       return Result.fail('Las credenciales ingresadas son inválidas')
     }
 
-    const token = this.authService.sign({
+    const payload = {
       document: user?.document,
-      accounts: [],
       id: user?.id.toString(),
-    })
+      accountId: user?.account?.id.toString(),
+    }
 
-    return Result.ok({ token, document: user?.document })
+    const token = this.authService.sign(payload)
+    return Result.ok({
+      ...payload,
+      token,
+    })
   }
 }

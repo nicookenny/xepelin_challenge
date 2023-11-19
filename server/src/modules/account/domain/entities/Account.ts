@@ -121,6 +121,7 @@ export class Account extends Entity<AccountProps> {
       owner: this.props.userId,
       number: this.props.number,
       balance: this.props.balance,
+      transactions: this.props.transactions?.map((t) => t.toDTO()),
     }
   }
 }
