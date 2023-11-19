@@ -16,7 +16,7 @@ export class LoginUseCase {
     const userOrError = this.userRepository.getByDocument(document)
 
     if (userOrError.isFailure) {
-      return Result.fail(userOrError.getErrorValue() as string)
+      return Result.fail('Las credenciales ingresadas son inválidas')
     }
 
     const user = userOrError.getValue()!
@@ -24,7 +24,7 @@ export class LoginUseCase {
     const passwordMatch = await user?.password.comparePassword(password)
 
     if (!passwordMatch) {
-      return Result.fail('La contraseñae es incorrecta')
+      return Result.fail('Las credenciales ingresadas son inválidas')
     }
 
     const token = this.authService.sign({
@@ -33,6 +33,6 @@ export class LoginUseCase {
       id: user?.id.toString(),
     })
 
-    return Result.ok({ token })
+    return Result.ok({ token, document: user?.document })
   }
 }

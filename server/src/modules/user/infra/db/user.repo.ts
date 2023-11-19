@@ -29,7 +29,7 @@ export class UserRepository implements IUserRepository {
     const exists = this.exists(user.document)
 
     if (!exists.getValue()) {
-      return Result.fail<void>('User not found')
+      return Result.fail<void>('El usuario que buscas no existe')
     }
 
     const index = users.findIndex((user) => user.document === user.document)
@@ -42,7 +42,7 @@ export class UserRepository implements IUserRepository {
     const user = users.find((user) => user.document === document)
 
     if (!user) {
-      return Result.fail<User>('User not found')
+      return Result.fail<User>('El usuario que buscas no existe')
     }
 
     return Result.ok<User>(user)
@@ -52,7 +52,7 @@ export class UserRepository implements IUserRepository {
     const user = users.find((user) => user.id.toString() === id)
 
     if (!user) {
-      return Result.fail<User>('User not found')
+      return Result.fail<User>('El usuario que buscas ')
     }
 
     return Result.ok<User>(user)
