@@ -4,7 +4,7 @@ import { Result } from '../../../../../shared/core/Result'
 import { Account } from '../../../domain/entities/Account'
 import { IAccountRepository } from '../../../domain/repos/account.repo'
 
-export class GetAccountByNumberUseCase {
+export class GetAccountById {
   constructor(private readonly repository: IAccountRepository) {}
 
   async exec(id: string): Promise<Result<Account>> {

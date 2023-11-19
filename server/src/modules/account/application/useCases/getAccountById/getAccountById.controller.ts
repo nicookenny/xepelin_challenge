@@ -1,11 +1,11 @@
 /** @format */
 
 import { Request, Response } from 'express'
-import { GetAccountByNumberUseCase } from './getAccountByNumber.uc'
+import { GetAccountById } from './getAccountById.uc'
 import { BaseController } from '../../../../../shared/infra/models/BaseController'
 
-export class GetAccountByNumberController extends BaseController {
-  constructor(private readonly useCase: GetAccountByNumberUseCase) {
+export class GetAccountByIdController extends BaseController {
+  constructor(private readonly useCase: GetAccountById) {
     super()
   }
 
