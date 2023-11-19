@@ -1,12 +1,12 @@
 /** @format */
 
-import { ITransaction } from "../../transaction/models"
+import { IAccount } from '../../account/models'
+import { ITransaction } from '../../transaction/models'
 
 export interface IUser {
   id: string
   document: string
-  accountId?: string
-  transactions: ITransaction[]
+  account: IAccount | null
 }
 
 export interface LoginDTO {

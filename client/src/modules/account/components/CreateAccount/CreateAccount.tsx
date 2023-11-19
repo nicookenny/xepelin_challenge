@@ -7,8 +7,8 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { accountService } from '../../service'
 import { toast } from 'react-toastify'
 import { useUserContext } from '../../../user/context/UserContext'
-import { setAccountId } from '../../../user/context/UserActions'
 import { useEffect } from 'react'
+import { setAccount } from '../../../user/context/UserActions'
 
 const CreateAccount = () => {
   const navigate = useNavigate()
@@ -28,7 +28,15 @@ const CreateAccount = () => {
       })
 
       if (response.success) {
-        dispatch(setAccountId(response.data.id))
+        dispatch(
+          setAccount({
+            name: values.name,
+            number: +values.accountNumber,
+            accountId: response.data.data.id,
+            balance: values.balance,
+            transactions: [],
+          })
+        )
 
         toast.success(
           `¡Genial, la cuenta ${values.name} fue creada correctamente!`
@@ -45,12 +53,12 @@ const CreateAccount = () => {
     return <Navigate to='/' />
   }
 
-  if (user.accountId) {
+  if (user.account?.accountId) {
     return <Navigate to='/home/account' />
   }
 
   useEffect(() => {
-    if (user.accountId) {
+    if (user.account?.accountId) {
       navigate('/home/account')
     }
   }, [])
