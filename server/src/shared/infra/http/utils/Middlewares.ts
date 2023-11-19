@@ -30,17 +30,10 @@ export class Middlewares {
     res: Response,
     next: NextFunction
   ) {
-    const route = req.originalUrl
-    const method = req.method
+    const { amount } = req.body
 
-    if (route === '/transactions' && method === 'POST') {
-      const { amount } = req.body
-
-      if (Number(amount) > 10000) {
-        console.log(
-          'Se registró una transacción cun un importe mayor a $10.000'
-        )
-      }
+    if (Number(amount) > 10000) {
+      console.log('Se registró una transacción cun un importe mayor a $10.000')
     }
 
     next()

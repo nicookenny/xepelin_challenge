@@ -22,7 +22,6 @@ export class LoginUseCase {
     const user = userOrError.getValue()!
 
     const passwordMatch = await user?.password.comparePassword(password)
-    console.log({ password, passwordMatch, user })
 
     if (!passwordMatch) {
       return Result.fail('La contraseñae es incorrecta')

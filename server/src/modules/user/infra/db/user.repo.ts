@@ -16,7 +16,6 @@ export class UserRepository implements IUserRepository {
 
   save(user: User): Result<void> {
     const exists = this.exists(user.document)
-    console.log({ exists })
     if (exists.getValue()) {
       return Result.fail<void>('User already exists')
     }
