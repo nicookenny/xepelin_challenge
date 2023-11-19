@@ -2,6 +2,7 @@
 
 import { NextFunction, Request, Response } from 'express'
 import { IAuthService } from '../../../../modules/user/services/auth.service'
+import { TransactionType } from '../../../../modules/transaction/domain/entities/Transaction'
 
 export class Middlewares {
   constructor(private readonly authService: IAuthService) {}
@@ -30,9 +31,9 @@ export class Middlewares {
     res: Response,
     next: NextFunction
   ) {
-    const { amount } = req.body
+    const { amount, type } = req.body
 
-    if (Number(amount) > 10000) {
+    if (+amount > 10000 && type === TransactionType.DEPOSIT) {
       console.log('Se registró una transacción cun un importe mayor a $10.000')
     }
 
