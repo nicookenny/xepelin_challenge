@@ -7,14 +7,14 @@ import { useEffect } from 'react'
 import { IUser } from '../../modules/user/model'
 
 const Home = () => {
-  const { user } = useUserContext()
+  const { user, account } = useUserContext()
   const navigate = useNavigate()
 
   const handleAuthentication = (user: IUser | null) => {
     if (!user) {
       navigate('/')
     } else {
-      if (user.accountId) {
+      if (account?.accountId) {
         navigate('/home/account')
       } else {
         navigate('/home/create-account')
@@ -24,7 +24,7 @@ const Home = () => {
 
   useEffect(() => {
     handleAuthentication(user)
-  }, [user])
+  }, [user, account])
 
   return (
     <Container>
