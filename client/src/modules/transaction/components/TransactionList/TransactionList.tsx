@@ -13,7 +13,6 @@ import {
   TableRow,
 } from '@mui/material'
 import { ChangeEvent, FC, MouseEvent, useState } from 'react'
-import { ITransaction } from '../../models'
 import { formatAmount, formatDate } from '../../../common/utils'
 import { Header, Title } from './styles'
 import AddTransaction from '../AddTransaction/AddTransaction'

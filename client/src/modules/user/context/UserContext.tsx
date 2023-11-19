@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useContext, createContext, useReducer, Dispatch } from 'react'
+import { useContext, createContext, useReducer, Dispatch } from 'react'
 import { UserReducer } from './UserReducer'
 import { IUserAction } from './UserActions'
 import { IUser } from '../model'

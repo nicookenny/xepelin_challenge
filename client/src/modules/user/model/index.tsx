@@ -1,7 +1,6 @@
 /** @format */
 
 import { IAccount } from '../../account/models'
-import { ITransaction } from '../../transaction/models'
 
 export interface IUser {
   id: string

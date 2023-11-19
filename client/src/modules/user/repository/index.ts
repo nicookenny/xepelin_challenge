@@ -1,6 +1,6 @@
 /** @format */
 
-import { AxiosError, AxiosInstance } from 'axios'
+import { AxiosInstance } from 'axios'
 import { LoginDTO, RegisterDTO } from '../model'
 
 interface IResponse {
