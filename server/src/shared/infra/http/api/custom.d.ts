@@ -5,7 +5,7 @@ declare namespace Express {
     user?: {
       id: string
       document: string
-      accounts: string[]
+      accountId?: string
     }
   }
 }

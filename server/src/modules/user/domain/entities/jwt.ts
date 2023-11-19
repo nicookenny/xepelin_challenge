@@ -3,7 +3,7 @@
 export interface JWTClaims {
   id: string
   document: string
-  accounts: string[]
+  accountId?: string
 }
 
 export type JWTToken = string
