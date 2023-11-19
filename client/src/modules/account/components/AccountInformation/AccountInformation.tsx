@@ -5,7 +5,7 @@ import { AccountDetail, AccountName, Container, Greeting } from './styles'
 import TransactionList from '../../../transaction/components/TransactionList/TransactionList'
 import { Button } from '@mui/material'
 import { useUserContext } from '../../../user/context/UserContext'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { accountService } from '../../service'
 import { toast } from 'react-toastify'
 import {
@@ -15,21 +15,13 @@ import {
 
 const AccountInformation = () => {
   const navigate = useNavigate()
-  const { user, dispatch } = useUserContext()
-  const [account, setAccount] = useState<{
-    number: number
-    balance: number
-    name: string
-    transactions: any[]
-  } | null>(null)
+  const { user, account, dispatch } = useUserContext()
 
   if (!user) {
     return <Navigate to='/' />
   }
 
-  const { accountId } = user
-
-  if (!accountId) {
+  if (!account?.accountId) {
     navigate('/home/create-account')
   }
 
@@ -43,7 +35,6 @@ const AccountInformation = () => {
 
     if (response.success) {
       const accountInformation = response.data.data
-      setAccount(accountInformation)
       dispatch(fillTransactions(accountInformation.transactions))
     } else {
       toast.error(response.message)
@@ -51,10 +42,10 @@ const AccountInformation = () => {
   }
 
   useEffect(() => {
-    if (accountId) {
-      getAccount(accountId)
+    if (account?.accountId) {
+      getAccount(account?.accountId)
     }
-  }, [accountId])
+  }, [account?.accountId])
 
   if (!account) {
     return <Greeting>¡Estamos obteniendo la información de tu cuenta!</Greeting>

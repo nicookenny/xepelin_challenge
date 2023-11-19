@@ -24,13 +24,13 @@ import {
 import { useUserContext } from '../../../user/context/UserContext'
 
 const TransactionList: FC = () => {
-  const { user } = useUserContext()
+  const { account } = useUserContext()
   const [addingTransaction, setAddingTransaction] = useState(false)
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
 
   const handleChangePage = (
-    event: MouseEvent<HTMLButtonElement> | null,
+    _event: MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
     setPage(newPage)
@@ -70,11 +70,11 @@ const TransactionList: FC = () => {
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? user?.transactions?.slice(
+              ? account?.transactions?.slice(
                   page * rowsPerPage,
                   page * rowsPerPage + rowsPerPage
                 )
-              : user?.transactions
+              : account?.transactions
             )?.map((row) => (
               <TableRow key={row.id}>
                 <TableCell align='left'>{formatDate(row.date)}</TableCell>
@@ -94,7 +94,7 @@ const TransactionList: FC = () => {
               <TablePagination
                 rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
                 colSpan={3}
-                count={user?.transactions?.length || 0}
+                count={account?.transactions?.length || 0}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}

@@ -18,19 +18,15 @@ const AddTransaction: FC<{
   open: boolean
   onClose: () => void
 }> = ({ open, onClose }) => {
-  const { user, dispatch } = useUserContext()
+  const { account, dispatch } = useUserContext()
   const formik = useFormik({
     initialValues: {
       amount: 0,
       type: TransactionType.DEPOSIT,
     },
     onSubmit: async (values) => {
-      const { accountId } = user as {
-        accountId: string
-      }
-
       const response = await transactionService.addTransaction({
-        accountId,
+        accountId: account!.accountId,
         amount: values.amount,
         type: values.type as TransactionType,
       })
