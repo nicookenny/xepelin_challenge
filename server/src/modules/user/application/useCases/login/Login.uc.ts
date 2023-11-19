@@ -30,7 +30,12 @@ export class LoginUseCase {
     const payload = {
       document: user?.document,
       id: user?.id.toString(),
-      accountId: user?.account?.id.toString(),
+      account: {
+        accountId: user?.account?.id.toString()!,
+        balance: user?.account?.balance!,
+        name: user?.account?.name!,
+        number: user?.account?.number!,
+      },
     }
 
     const token = this.authService.sign(payload)

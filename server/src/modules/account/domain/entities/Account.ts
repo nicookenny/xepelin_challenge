@@ -36,6 +36,10 @@ export class Account extends Entity<AccountProps> {
     return this.props.number
   }
 
+  get name(): string {
+    return this.props.name
+  }
+
   get balance(): number {
     return this.props.balance
   }
