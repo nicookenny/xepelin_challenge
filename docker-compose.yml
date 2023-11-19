@@ -1,0 +1,18 @@
+services:
+  # Servicio para la aplicación Node.js
+  node-app:
+    build:
+      context: .
+      dockerfile: ./server/Dockerfile
+    container_name: api-node
+    ports:
+      - "3000:3000"
+
+  # Servicio para la aplicación React
+  react-app:
+    build:
+      context: .
+      dockerfile: ./client/Dockerfile
+    container_name: react-app
+    ports:
+      - "8000:8000"
