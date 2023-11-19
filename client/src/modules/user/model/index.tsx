@@ -1,8 +1,12 @@
 /** @format */
 
+import { ITransaction } from "../../transaction/models"
+
 export interface IUser {
   id: string
   document: string
+  accountId?: string
+  transactions: ITransaction[]
 }
 
 export interface LoginDTO {

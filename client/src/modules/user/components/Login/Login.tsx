@@ -29,11 +29,13 @@ const Login = () => {
       const result = await userService.login({ document, password })
 
       if (result.success) {
-        const { document, id } = result.data
+        const { document, id, accountId } = result.data
         dispatch(
           setClient({
             document,
             id,
+            accountId,
+            transactions: [],
           })
         )
         toast.success('¡Bienvenido!')

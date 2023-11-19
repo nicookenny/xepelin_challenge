@@ -21,7 +21,7 @@ export class UserRepository {
       const result = await this.api.post('/users', dto)
       return {
         success: true,
-        data: result,
+        data: result.data,
       }
     } catch (error: any) {
       return {
@@ -39,10 +39,9 @@ export class UserRepository {
       })
       return {
         success: true,
-        data: result,
+        data: result.data,
       }
     } catch (error: any) {
-        
       return {
         success: false,
         message: error.response?.data.message,
