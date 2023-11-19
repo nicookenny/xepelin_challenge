@@ -21,13 +21,26 @@ export class AccountRepository implements IAccountRepository {
     const exists = this.existsByNumber(account.number)
 
     if (exists.getValue()) {
-      const index = accounts.findIndex(
-        (account) => account.number === account.number
-      )
-      accounts[index] = account
+      return Result.fail<void>('Account already exists')
     } else {
       accounts.push(account)
     }
+
+    return Result.ok<void>()
+  }
+
+  update(account: Account) {
+    const exists = this.exists(account.id.toString())
+
+    if (!exists.getValue()) {
+      return Result.fail<void>('Account does not exists')
+    }
+
+    const index = accounts.findIndex(
+      (account) => account.id.toString() === account.id.toString()
+    )
+
+    accounts[index] = account
 
     return Result.ok<void>()
   }

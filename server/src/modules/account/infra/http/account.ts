@@ -2,7 +2,7 @@
 
 import { Router } from 'express'
 import { createAccountController } from '../../application/useCases/createAccount'
-import { getAccountByNumberController } from '../../application/useCases/getAccountByNumber'
+import { getAccountByNumberController } from '../../application/useCases/getAccountById'
 import { getAccountsController } from '../../application/useCases/getAccounts'
 import { middlewares } from '../../../../shared/infra/http'
 

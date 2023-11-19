@@ -8,6 +8,7 @@ export interface IAccountRepository {
   exists(id: string): Result<boolean>
   existsByNumber(number: number): Result<boolean>
   save(account: Account): Result<void>
+  update(account: Account): Result<void>
   getAccount(id: string): Result<Account>
   getAccounts(): Result<Account[]>
 }
