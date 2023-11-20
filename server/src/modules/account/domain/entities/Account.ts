@@ -78,8 +78,16 @@ export class Account extends Entity<AccountProps> {
   ): Result<Account> {
     const errors = []
 
+    if (!userId) {
+      errors.push(Result.fail('User id cannot be empty'))
+    }
+
     if (!number) {
       errors.push(Result.fail('Number cannot be empty'))
+    }
+
+    if (typeof number !== 'number') {
+      errors.push(Result.fail('Number must be a number'))
     }
 
     if (!name) {
@@ -88,6 +96,10 @@ export class Account extends Entity<AccountProps> {
 
     if (balance < 0) {
       errors.push(Result.fail('Balance cannot be negative'))
+    }
+
+    if (typeof balance !== 'number') {
+      errors.push(Result.fail('Balance must be a number'))
     }
 
     if (errors.length) {
