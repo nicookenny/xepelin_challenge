@@ -18,6 +18,9 @@ export class CreateUserController extends BaseController {
       return this.fail(res, result.getErrorValue() as string)
     }
 
-    return this.ok(res, result.getValue())
+    return this.ok(res, {
+      data: result.getValue()!.toDTO(),
+      message: 'User created successfully',
+    })
   }
 }
