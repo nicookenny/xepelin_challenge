@@ -61,4 +61,26 @@ describe('Get Accounts Controller', () => {
       data: accounts.map((account) => account.toDTO()),
     })
   })
+
+  it('should fail when useCase fails', async () => {
+    jest
+      .spyOn(useCase, 'exec')
+      .mockImplementationOnce(() => Promise.resolve(Result.fail("Error" as any)))
+
+    const req = {}
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn().mockReturnThis(),
+      type: jest.fn().mockReturnThis(),
+      sendStatus: jest.fn().mockReturnThis(),
+    }
+
+    await controller.exec(req as any, res as any)
+
+    expect(res.status).toHaveBeenCalledWith(500)
+    expect(res.json).toHaveBeenCalledWith({
+      message: 'Error',
+      
+    })
+  })
 })

@@ -36,7 +36,7 @@ describe('Create Account Use Case', () => {
     const result = await useCase.exec(dto)
 
     expect(result.isFailure).toBe(true)
-    expect(result).toMatchObject(Result.fail('El usuario que buscas '))
+    expect(result).toMatchObject(Result.fail('El usuario que buscas no existe'))
   })
 
   userRepository.save(user.getValue()!)

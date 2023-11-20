@@ -5,11 +5,15 @@
 
 module.exports = {
   preset: 'ts-jest',
-  testEnvironment: 'node',
   verbose: true,
   testEnvironment: 'node',
   testMatch: ['**/*.spec.ts'],
   collectCoverage: true,
-  collectCoverageFrom: ['**/*.ts'],
-  testPathIgnorePatterns: ['/node_modules/', '/dist/', './src/index.ts'],
+  collectCoverageFrom: [
+    '**/modules/**/*.ts',
+    '!/src/modules/user/infra/http/user.ts',
+    '!/src/modules/transaction/infra/http/transaction.ts',
+    '!/src/modules/account/infra/http/account.ts',
+  ],
+  testPathIgnorePatterns: ['/node_modules/', '/dist/'],
 }

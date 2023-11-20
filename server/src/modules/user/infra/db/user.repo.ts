@@ -52,7 +52,7 @@ export class UserRepository implements IUserRepository {
     const user = users.find((user) => user.id.toString() === id)
 
     if (!user) {
-      return Result.fail<User>('El usuario que buscas ')
+      return Result.fail<User>('El usuario que buscas no existe')
     }
 
     return Result.ok<User>(user)
