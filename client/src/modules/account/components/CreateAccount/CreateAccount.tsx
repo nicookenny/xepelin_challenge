@@ -12,7 +12,7 @@ import { setAccount } from '../../../user/context/UserActions'
 
 const CreateAccount = () => {
   const navigate = useNavigate()
-  const { dispatch, user } = useUserContext()
+  const { dispatch, user, account } = useUserContext()
 
   const formik = useFormik({
     initialValues: {
@@ -53,12 +53,12 @@ const CreateAccount = () => {
     return <Navigate to='/' />
   }
 
-  if (user.account?.accountId) {
+  if (account?.accountId) {
     return <Navigate to='/home/account' />
   }
 
   useEffect(() => {
-    if (user.account?.accountId) {
+    if (account?.accountId) {
       navigate('/home/account')
     }
   }, [])
@@ -73,9 +73,15 @@ const CreateAccount = () => {
         fullWidth
         onChange={formik.handleChange}
         value={formik.values.name}
+        inputProps={{
+          'data-testid': 'name-input',
+        }}
       />
 
       <TextField
+        inputProps={{
+          'data-testid': 'account-number-input',
+        }}
         type='text'
         name='accountNumber'
         variant='filled'
@@ -86,6 +92,9 @@ const CreateAccount = () => {
       />
 
       <TextField
+        inputProps={{
+          'data-testid': 'balance-input',
+        }}
         type='number'
         name='balance'
         label='Saldo'
@@ -95,7 +104,9 @@ const CreateAccount = () => {
         value={formik.values.balance}
       />
 
-      <Button type='submit'>Crear cuenta</Button>
+      <Button type='submit' data-testid='create-account-button'>
+        Crear cuenta
+      </Button>
     </Container>
   )
 }

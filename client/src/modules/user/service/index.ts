@@ -16,7 +16,6 @@ export class UserService {
     const result = await this.repository.login(dto)
     if (result.success) {
       const { token } = result.data
-      console.log({ result })
       localStorage.setItem('token', token)
     }
     return result

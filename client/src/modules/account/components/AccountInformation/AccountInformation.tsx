@@ -32,7 +32,6 @@ const AccountInformation = () => {
   }
   const getAccount = async (accountId: string) => {
     const response = await accountService.getDetails(accountId)
-
     if (response.success) {
       const accountInformation = response.data.data
       dispatch(fillTransactions(accountInformation.transactions))
@@ -65,7 +64,9 @@ const AccountInformation = () => {
 
       <TransactionList />
 
-      <Button onClick={logout}>Cerrar sesión</Button>
+      <Button data-testid='button-logout' onClick={logout}>
+        Cerrar sesión
+      </Button>
     </Container>
   )
 }
