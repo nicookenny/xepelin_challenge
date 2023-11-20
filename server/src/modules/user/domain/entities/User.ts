@@ -76,4 +76,13 @@ export class User extends Entity<UserProps> {
 
     return Result.ok<void>()
   }
+
+  public toDTO() {
+    return {
+      id: this.id.toString(),
+      name: this.name,
+      document: this.document,
+      account: this.account?.toDTO(),
+    }
+  }
 }
