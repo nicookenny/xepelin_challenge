@@ -23,6 +23,10 @@ export class User extends Entity<UserProps> {
     return this._id
   }
 
+  get name(): string {
+    return this.props.name
+  }
+
   get document(): string {
     return this.props.document
   }

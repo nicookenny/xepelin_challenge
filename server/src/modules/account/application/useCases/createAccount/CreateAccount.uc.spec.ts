@@ -18,6 +18,12 @@ const user = User.create({
   password: Password.create({ value: '123456' }).getValue()!,
 })
 
+const secondUser = User.create({
+  document: '2912092',
+  name: 'Pedro',
+  password: Password.create({ value: '123456' }).getValue()!,
+})
+
 describe('Create Account Use Case', () => {
   it("should fail when user doesn't exist", async () => {
     const dto = {
@@ -50,5 +56,21 @@ describe('Create Account Use Case', () => {
     expect(created.name).toBe(dto.name)
     expect(created.number).toBe(dto.number)
     expect(created.balance).toBe(dto.balance)
+  })
+
+  userRepository.save(secondUser.getValue()!)
+
+  it("should fail when account's number already exists", async () => {
+    const dto = {
+      name: 'test',
+      number: 123456789,
+      balance: 0,
+      userId: secondUser.getValue()!.id.toString(),
+    }
+
+    const result = await useCase.exec(dto)
+
+    expect(result.isFailure).toBe(true)
+    expect(result).toMatchObject(Result.fail('Account already exists'))
   })
 })
