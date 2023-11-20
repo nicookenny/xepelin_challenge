@@ -2,11 +2,11 @@
 
 import { AccountRepository } from '../../../infra/db/account.repo'
 import { GetAccountByIdController } from './getAccountById.controller'
-import { GetAccountById } from './getAccountById.uc'
+import { GetAccountByIdUseCase } from './getAccountById.uc'
 
 const repo = new AccountRepository()
 
-const useCase = new GetAccountById(repo)
+const useCase = new GetAccountByIdUseCase(repo)
 
 const controller = new GetAccountByIdController(useCase)
 
