@@ -49,10 +49,6 @@ export class Account extends Entity<AccountProps> {
   }
 
   public withdraw(amount: number): Result<void> {
-    if (amount < 0) {
-      return Result.fail<void>('El importe a retirar no puede ser negativo')
-    }
-
     if (this.balance < amount) {
       return Result.fail<void>('No hay suficiente saldo en la cuenta')
     }
@@ -63,10 +59,6 @@ export class Account extends Entity<AccountProps> {
   }
 
   public deposit(amount: number): Result<void> {
-    if (amount < 0) {
-      return Result.fail<void>('El importe a depositar no puede ser negativo')
-    }
-
     this.props.balance += amount
 
     return Result.ok<void>()
