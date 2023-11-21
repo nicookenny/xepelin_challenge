@@ -4,16 +4,28 @@ import { Result } from '../../../../shared/core/Result'
 import { Account } from '../../domain/entities/Account'
 import { IAccountRepository } from '../../domain/repos/account.repo'
 
-const accounts: Account[] = []
-
 export class AccountRepository implements IAccountRepository {
+  private static instance: AccountRepository | null = null
+  private accounts: Account[] = []
+
+  private constructor() {}
+
+  static getInstance(): AccountRepository {
+    if (!AccountRepository.instance) {
+      AccountRepository.instance = new AccountRepository()
+    }
+    return AccountRepository.instance
+  }
+
   exists(id: string): Result<boolean> {
-    const account = accounts.find((account) => account.id.toString() === id)
+    const account = this.accounts.find(
+      (account) => account.id.toString() === id
+    )
     return Result.ok<boolean>(!!account)
   }
 
   existsByNumber(number: number): Result<boolean> {
-    const account = accounts.find((account) => account.number === number)
+    const account = this.accounts.find((account) => account.number === number)
     return Result.ok<boolean>(!!account)
   }
 
@@ -23,7 +35,7 @@ export class AccountRepository implements IAccountRepository {
     if (exists.getValue()) {
       return Result.fail<void>('Account already exists')
     } else {
-      accounts.push(account)
+      this.accounts.push(account)
     }
 
     return Result.ok<void>()
@@ -36,17 +48,19 @@ export class AccountRepository implements IAccountRepository {
       return Result.fail<void>('Account does not exists')
     }
 
-    const index = accounts.findIndex(
+    const index = this.accounts.findIndex(
       (account) => account.id.toString() === account.id.toString()
     )
 
-    accounts[index] = account
+    this.accounts[index] = account
 
     return Result.ok<void>()
   }
 
   getAccount(id: string): Result<Account> {
-    const account = accounts.find((account) => account.id.toString() === id)
+    const account = this.accounts.find(
+      (account) => account.id.toString() === id
+    )
 
     if (!account) {
       return Result.fail<Account>('Account not found')
@@ -56,6 +70,6 @@ export class AccountRepository implements IAccountRepository {
   }
 
   getAccounts(): Result<Account[]> {
-    return Result.ok<Account[]>(accounts)
+    return Result.ok<Account[]>(this.accounts)
   }
 }

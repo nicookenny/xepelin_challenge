@@ -5,11 +5,22 @@ import { Password } from '../../domain/entities/Password'
 import { User } from '../../domain/entities/User'
 import { IUserRepository } from '../../domain/repos/user.repo'
 
-const users: User[] = []
-
 export class UserRepository implements IUserRepository {
+  private static instance: UserRepository | null = null
+
+  private users: User[] = []
+
+  private constructor() {}
+
+  static getInstance(): UserRepository {
+    if (!UserRepository.instance) {
+      UserRepository.instance = new UserRepository()
+    }
+    return UserRepository.instance
+  }
+
   exists(document: string): Result<boolean> {
-    const exists = users.some((user) => user.document === document)
+    const exists = this.users.some((user) => user.document === document)
 
     return Result.ok<boolean>(exists)
   }
@@ -20,7 +31,7 @@ export class UserRepository implements IUserRepository {
       return Result.fail<void>('User already exists')
     }
 
-    users.push(user)
+    this.users.push(user)
 
     return Result.ok<void>()
   }
@@ -32,14 +43,16 @@ export class UserRepository implements IUserRepository {
       return Result.fail<void>('El usuario que buscas no existe')
     }
 
-    const index = users.findIndex((user) => user.document === user.document)
-    users[index] = user
+    const index = this.users.findIndex(
+      (user) => user.document === user.document
+    )
+    this.users[index] = user
 
     return Result.ok<void>()
   }
 
   getByDocument(document: string): Result<User> {
-    const user = users.find((user) => user.document === document)
+    const user = this.users.find((user) => user.document === document)
 
     if (!user) {
       return Result.fail<User>('El usuario que buscas no existe')
@@ -49,7 +62,7 @@ export class UserRepository implements IUserRepository {
   }
 
   getById(id: string): Result<User> {
-    const user = users.find((user) => user.id.toString() === id)
+    const user = this.users.find((user) => user.id.toString() === id)
 
     if (!user) {
       return Result.fail<User>('El usuario que buscas no existe')
