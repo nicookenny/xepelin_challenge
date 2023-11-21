@@ -17,7 +17,7 @@ export interface IUserAction {
   payload?: any
 }
 
-export const setClient = (user: IUser) => ({
+export const setClient = (user: IUser & { account: IAccount }) => ({
   type: ActionTypes.SET_USER,
   payload: user,
 })

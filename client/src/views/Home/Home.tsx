@@ -5,12 +5,13 @@ import { Container, Content, Title } from './styles'
 import { useUserContext } from '../../modules/user/context/UserContext'
 import { useEffect } from 'react'
 import { IUser } from '../../modules/user/model'
+import { IAccount } from '../../modules/account/models'
 
 const Home = () => {
   const { user, account } = useUserContext()
   const navigate = useNavigate()
 
-  const handleAuthentication = (user: IUser | null) => {
+  const handleAuthentication = (user: IUser | null, account: IAccount | null) => {
     if (!user) {
       navigate('/')
     } else {
@@ -23,7 +24,7 @@ const Home = () => {
   }
 
   useEffect(() => {
-    handleAuthentication(user)
+    handleAuthentication(user, account)
   }, [user, account])
 
   return (

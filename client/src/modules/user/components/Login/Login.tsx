@@ -50,28 +50,37 @@ const Login = () => {
         <TextField
           type='text'
           name='document'
+          inputProps={{
+            'data-testid': 'document-input',
+          }}
           label='Documento'
           variant='filled'
           fullWidth
           onChange={formik.handleChange}
           value={formik.values.document}
           error={formik.touched.document && Boolean(formik.errors.document)}
+          helperText={formik.touched.document && formik.errors.document}
         />
         <TextField
           type='password'
           name='password'
+          inputProps={{
+            'data-testid': 'password-input',
+          }}
           label='Contraseña'
           variant='filled'
           fullWidth
           onChange={formik.handleChange}
           value={formik.values.password}
           error={formik.touched.password && Boolean(formik.errors.password)}
+          helperText={formik.touched.password && formik.errors.password}
         />
         <Button
           type='submit'
           variant='contained'
           color='primary'
           fullWidth
+          data-testid='login-button'
           size='large'>
           Ingresar
         </Button>

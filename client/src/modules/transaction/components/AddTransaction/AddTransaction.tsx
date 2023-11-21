@@ -63,6 +63,9 @@ const AddTransaction: FC<{
             variant='filled'
             label='Tipo'
             fullWidth
+            inputProps={{
+              'data-testid': 'select-type',
+            }}
             onChange={formik.handleChange}
             value={formik.values.type}>
             {Object.keys(TransactionType).map((type) => {
@@ -81,11 +84,18 @@ const AddTransaction: FC<{
             variant='filled'
             label='Monto'
             fullWidth
+            inputProps={{
+              'data-testid': 'amount-input',
+            }}
             onChange={formik.handleChange}
             value={formik.values.amount}
           />
 
-          <Button variant='contained' color='primary' type='submit'>
+          <Button
+            variant='contained'
+            color='primary'
+            type='submit'
+            data-testid='submit-button'>
             Guardar
           </Button>
         </TransactionForm>

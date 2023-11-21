@@ -48,6 +48,9 @@ const Register = () => {
           type='text'
           name='name'
           label='Nombre y apellido'
+          inputProps={{
+            'data-testid': 'name-input',
+          }}
           variant='filled'
           fullWidth
           onChange={formik.handleChange}
@@ -62,6 +65,9 @@ const Register = () => {
           label='Documento'
           variant='filled'
           fullWidth
+          inputProps={{
+            'data-testid': 'document-input',
+          }}
           onChange={formik.handleChange}
           value={formik.values.document}
           error={formik.touched.document && Boolean(formik.errors.document)}
@@ -72,6 +78,9 @@ const Register = () => {
           type='password'
           name='password'
           label='Contraseña'
+          inputProps={{
+            'data-testid': 'password-input',
+          }}
           variant='filled'
           fullWidth
           onChange={formik.handleChange}
@@ -84,6 +93,9 @@ const Register = () => {
           type='password'
           name='confirmPassword'
           label='Confirmar Contraseña'
+          inputProps={{
+            'data-testid': 'confirm-password-input',
+          }}
           variant='filled'
           fullWidth
           onChange={formik.handleChange}
