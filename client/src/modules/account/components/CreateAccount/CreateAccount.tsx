@@ -49,20 +49,6 @@ const CreateAccount = () => {
     },
   })
 
-  if (!user) {
-    return <Navigate to='/' />
-  }
-
-  if (account?.accountId) {
-    return <Navigate to='/home/account' />
-  }
-
-  useEffect(() => {
-    if (account?.accountId) {
-      navigate('/home/account')
-    }
-  }, [])
-
   return (
     <Container onSubmit={formik.handleSubmit}>
       <TextField

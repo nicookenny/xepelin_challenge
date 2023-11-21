@@ -9,21 +9,10 @@ import {
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-const Text = () => {
-  const { account, user } = useUserContext()
-  console.log({
-    account,
-    user,
-  })
-
-  return <></>
-}
-
 function App() {
   return (
     <UserContextProvider>
       <ToastContainer />
-      <Text />
       <RouterProvider router={router} />
     </UserContextProvider>
   )
