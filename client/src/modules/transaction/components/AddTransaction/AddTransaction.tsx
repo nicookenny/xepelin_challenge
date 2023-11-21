@@ -13,7 +13,15 @@ import {
   TransactionType,
 } from '../../../common/models'
 import { addTransaction } from '../../../user/context/UserActions'
+import * as yup from 'yup'
 
+const transactionSchema = yup.object().shape({
+  amount: yup
+    .number()
+    .min(1, 'El importe debe ser mayor a 0')
+    .required('El monto es requerido'),
+  type: yup.string().oneOf(Object.keys(TransactionType)).required(),
+})
 const AddTransaction: FC<{
   open: boolean
   onClose: () => void
@@ -24,6 +32,7 @@ const AddTransaction: FC<{
       amount: 0,
       type: TransactionType.DEPOSIT,
     },
+    validationSchema: transactionSchema,
     onSubmit: async (values) => {
       const response = await transactionService.addTransaction({
         accountId: account!.accountId,
@@ -63,6 +72,7 @@ const AddTransaction: FC<{
             variant='filled'
             label='Tipo'
             fullWidth
+            error={formik.touched.type && Boolean(formik.errors.type)}
             inputProps={{
               'data-testid': 'select-type',
             }}
@@ -89,6 +99,8 @@ const AddTransaction: FC<{
             }}
             onChange={formik.handleChange}
             value={formik.values.amount}
+            error={formik.touched.amount && Boolean(formik.errors.amount)}
+            helperText={formik.touched.amount && formik.errors.amount}
           />
 
           <Button

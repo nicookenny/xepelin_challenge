@@ -11,10 +11,6 @@ transactionRoutes.use((req, res, next) =>
   middlewares.checkToken(req, res, next)
 )
 
-transactionRoutes.get('/', (req, res) =>
-  getTransactionsController.execute(req, res)
-)
-
 transactionRoutes.post(
   '/',
   (req, res, next) => middlewares.registerLargeAmounts(req, res, next),

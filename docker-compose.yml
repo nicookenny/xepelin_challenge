@@ -7,6 +7,9 @@ services:
     container_name: api-node
     ports:
       - "3000:3000"
+    environment:
+      - JWT_SECRET=secret_1234
+
 
   # Servicio para la aplicación React
   react-app:
@@ -16,3 +19,6 @@ services:
     container_name: react-app
     ports:
       - "8000:8000"
+    environment:
+      - VITE_API_URL= http://localhost:3000/api
+      

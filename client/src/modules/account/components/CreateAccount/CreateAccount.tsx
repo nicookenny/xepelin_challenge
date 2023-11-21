@@ -3,16 +3,13 @@
 import { Container } from './styles'
 import { useFormik } from 'formik'
 import { Button, TextField } from '@mui/material'
-import { Navigate, useNavigate } from 'react-router-dom'
 import { accountService } from '../../service'
 import { toast } from 'react-toastify'
 import { useUserContext } from '../../../user/context/UserContext'
-import { useEffect } from 'react'
 import { setAccount } from '../../../user/context/UserActions'
 
 const CreateAccount = () => {
-  const navigate = useNavigate()
-  const { dispatch, user, account } = useUserContext()
+  const { dispatch } = useUserContext()
 
   const formik = useFormik({
     initialValues: {
