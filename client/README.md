@@ -29,7 +29,7 @@ cuenta bancaria y realizar transacciones bancarias como depósitos y retiros.
 1. Clona el repositorio:
 
 ```bash
-git clone [URL_DEL_REPOSITORIO]
+git clone https://github.com/nicookenny/xepelin_challenge.git
 cd xepelin-challenge/client
 ```
 
