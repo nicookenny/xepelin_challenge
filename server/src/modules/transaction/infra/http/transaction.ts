@@ -7,16 +7,18 @@ import { getTransactionsController } from '../../application/useCases/getTransac
 
 const transactionRoutes = Router()
 
-transactionRoutes.get(
-  '/',
-  (req, res, next) => middlewares.checkToken(req, res, next),
-  (req, res) => getTransactionsController.exec(req, res)
+transactionRoutes.use((req, res, next) =>
+  middlewares.checkToken(req, res, next)
 )
+
+transactionRoutes.get('/', (req, res) =>
+  getTransactionsController.execute(req, res)
+)
+
 transactionRoutes.post(
   '/',
-  (req, res, next) => middlewares.checkToken(req, res, next),
   (req, res, next) => middlewares.registerLargeAmounts(req, res, next),
-  (req, res) => addTransactionController.exec(req, res)
+  (req, res) => addTransactionController.execute(req, res)
 )
 
 export { transactionRoutes }

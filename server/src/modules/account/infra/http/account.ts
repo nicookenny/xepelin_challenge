@@ -7,12 +7,13 @@ import { getAccountsController } from '../../application/useCases/getAccounts'
 import { middlewares } from '../../../../shared/infra/http'
 
 const accountRoutes = Router()
-accountRoutes.post('/', 
-(req, res, next) => middlewares.checkToken(req, res, next),
-(req, res) => createAccountController.exec(req, res))
+
+accountRoutes.use((req, res, next) => middlewares.checkToken(req, res, next))
+
+accountRoutes.post('/', (req, res) => createAccountController.execute(req, res))
+
 accountRoutes.get('/:id', (req, res) =>
-  getAccountByNumberController.exec(req, res)
+  getAccountByNumberController.execute(req, res)
 )
-accountRoutes.get('/', (req, res) => getAccountsController.exec(req, res))
 
 export { accountRoutes }
