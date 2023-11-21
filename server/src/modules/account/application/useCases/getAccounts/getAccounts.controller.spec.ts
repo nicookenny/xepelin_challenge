@@ -6,7 +6,7 @@ import { AccountRepository } from '../../../infra/db/account.repo'
 import { GetAccountsController } from './getAccounts.controller'
 import { GetAccountsUseCase } from './getAccounts.uc'
 
-const repo = new AccountRepository()
+const repo = AccountRepository.getInstance()
 const useCase = new GetAccountsUseCase(repo)
 const controller = new GetAccountsController(useCase)
 
@@ -65,7 +65,9 @@ describe('Get Accounts Controller', () => {
   it('should fail when useCase fails', async () => {
     jest
       .spyOn(useCase, 'exec')
-      .mockImplementationOnce(() => Promise.resolve(Result.fail("Error" as any)))
+      .mockImplementationOnce(() =>
+        Promise.resolve(Result.fail('Error' as any))
+      )
 
     const req = {}
     const res = {
@@ -80,7 +82,6 @@ describe('Get Accounts Controller', () => {
     expect(res.status).toHaveBeenCalledWith(500)
     expect(res.json).toHaveBeenCalledWith({
       message: 'Error',
-      
     })
   })
 })

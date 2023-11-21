@@ -9,13 +9,10 @@ import { Result } from '../../../../../shared/core/Result'
 import { User } from '../../../../user/domain/entities/User'
 import { Password } from '../../../../user/domain/entities/Password'
 
-jest.mock('../../../../user/infra/db/user.repo')
-const repo = new AccountRepository()
-const userRepo = new UserRepository()
+const repo = AccountRepository.getInstance()
+const userRepo = UserRepository.getInstance()
 const useCase = new CreateAccountUseCase(repo, userRepo)
 const controller = new CreateAccountController(useCase)
-
-const mockUserRepo = userRepo as jest.Mocked<UserRepository>
 
 const user = User.create({
   document: '123456789',
@@ -30,14 +27,12 @@ const secondUser = User.create({
 })
 
 describe('Create Account Controller', () => {
+  userRepo.save(user.getValue()!)
   it('should return 201 when account is created', async () => {
-    mockUserRepo.getById.mockImplementationOnce(() =>
-      Result.ok(user.getValue()!)
-    )
-    mockUserRepo.update.mockImplementationOnce(() => Result.ok())
     const req = {
       user: {
-        id: '1',
+        document: user.getValue()!.document,
+        id: user.getValue()!.id.toString()
       },
       body: {
         name: 'test',
@@ -65,15 +60,10 @@ describe('Create Account Controller', () => {
   })
 
   it('should return 500 when  account number already exists', async () => {
-    mockUserRepo.getById.mockImplementationOnce(() =>
-      Result.ok(secondUser.getValue()!)
-    )
-
-    mockUserRepo.update.mockImplementationOnce(() => Result.ok())
-
     const req = {
       user: {
-        id: '1',
+        document: user.getValue()!.document,
+        id: user.getValue()!.id.toString()
       },
       body: {
         name: 'test',
@@ -93,18 +83,15 @@ describe('Create Account Controller', () => {
 
     expect(res.status).toHaveBeenCalledWith(500)
     expect(res.json).toHaveBeenCalledWith({
-      message: 'Account already exists',
+      message: 'El usuario ya tiene una cuenta',
     })
   })
 
   it("should return 500 when account isn't created", async () => {
-    mockUserRepo.getById.mockImplementationOnce(() =>
-      Result.ok(user.getValue()!)
-    )
-    mockUserRepo.update.mockImplementationOnce(() => Result.ok())
     const req = {
       user: {
-        id: '1',
+        document: user.getValue()!.document,
+        id: user.getValue()!.id.toString()
       },
       body: {
         name: 'test',

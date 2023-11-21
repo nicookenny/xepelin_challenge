@@ -3,7 +3,7 @@
 import { Transaction, TransactionType } from '../../domain/entities/Transaction'
 import { TransactionRepository } from './transaction.repo'
 
-const repo = new TransactionRepository()
+const repo = TransactionRepository.getInstance()
 
 describe('Transaction Repository', () => {
   const transaction = Transaction.create({

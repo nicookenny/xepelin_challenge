@@ -8,7 +8,7 @@ import { LoginController } from './Login.controller'
 import { LoginUseCase } from './Login.uc'
 process.env.JWT_SECRET = 'test'
 
-const userRepository = new UserRepository()
+const userRepository = UserRepository.getInstance()
 const authService = new AuthService()
 const useCase = new LoginUseCase(userRepository, authService)
 const controller = new LoginController(useCase)

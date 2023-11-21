@@ -5,7 +5,7 @@ import { AccountRepository } from '../../../infra/db/account.repo'
 import { Result } from '../../../../../shared/core/Result'
 import { Account } from '../../../domain/entities/Account'
 
-const repository = new AccountRepository()
+const repository = AccountRepository.getInstance()
 const useCase = new GetAccountByIdUseCase(repository)
 
 describe('Get Account By Id Use Case', () => {

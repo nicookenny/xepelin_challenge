@@ -6,7 +6,7 @@ import { Password } from '../../domain/entities/Password'
 import { User } from '../../domain/entities/User'
 import { UserRepository } from './user.repo'
 
-const repo = new UserRepository()
+const repo = UserRepository.getInstance()
 const user = User.create({
   document: '123456789',
   name: 'Pedro',

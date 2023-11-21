@@ -12,8 +12,8 @@ import {
 import { TransactionRepository } from '../../../infra/db/transaction.repo'
 import { GetTransactionsUseCase } from './GetTransactions.uc'
 
-const userRepository = new UserRepository()
-const transactionRepository = new TransactionRepository()
+const userRepository = UserRepository.getInstance()
+const transactionRepository = TransactionRepository.getInstance()
 const useCase = new GetTransactionsUseCase(userRepository)
 
 const user = User.create({

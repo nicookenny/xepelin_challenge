@@ -8,8 +8,8 @@ import { Account } from '../../../domain/entities/Account'
 import { AccountRepository } from '../../../infra/db/account.repo'
 import { CreateAccountUseCase } from './createAccount.uc'
 
-const repository = new AccountRepository()
-const userRepository = new UserRepository()
+const repository = AccountRepository.getInstance()
+const userRepository = UserRepository.getInstance()
 const useCase = new CreateAccountUseCase(repository, userRepository)
 
 const user = User.create({

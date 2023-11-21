@@ -4,7 +4,7 @@ import { AccountRepository } from '../../../infra/db/account.repo'
 import { GetAccountsUseCase } from './getAccounts.uc'
 import { Account } from '../../../domain/entities/Account'
 
-const repository = new AccountRepository()
+const repository = AccountRepository.getInstance()
 const useCase = new GetAccountsUseCase(repository)
 
 const accounts = [

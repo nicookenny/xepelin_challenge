@@ -3,7 +3,7 @@
 import { AccountRepository } from './account.repo'
 import { Account } from '../../domain/entities/Account'
 
-const repository = new AccountRepository()
+const repository = AccountRepository.getInstance()
 const data = {
   number: 123456,
   name: 'Cuenta Corriente',

@@ -13,10 +13,14 @@ import {
 import { TransactionRepository } from '../../../infra/db/transaction.repo'
 import { AddTransactionUseCase } from './AddTransaction.uc'
 
-const accountRepository = new AccountRepository()
-const transactionRepository = new TransactionRepository()
-const userRepository = new UserRepository()
-const useCase = new AddTransactionUseCase(accountRepository, userRepository)
+const accountRepository = AccountRepository.getInstance()
+const transactionRepository = TransactionRepository.getInstance()
+const userRepository = UserRepository.getInstance()
+const useCase = new AddTransactionUseCase(
+  accountRepository,
+  userRepository,
+  transactionRepository
+)
 
 const user = User.create({
   document: '123456789',

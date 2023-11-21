@@ -6,7 +6,7 @@ import { Password } from '../../../domain/entities/Password'
 import { UserRepository } from '../../../infra/db/user.repo'
 import { CreateUserUseCase } from './CreateUser.uc'
 
-const userRepository = new UserRepository()
+const userRepository = UserRepository.getInstance()
 const useCase = new CreateUserUseCase(userRepository)
 
 describe('Create User Use Case', () => {
