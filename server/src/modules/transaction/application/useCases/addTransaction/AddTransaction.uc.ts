@@ -4,12 +4,14 @@ import { Result } from '../../../../../shared/core/Result'
 import { IAccountRepository } from '../../../../account/domain/repos/account.repo'
 import { IUserRepository } from '../../../../user/domain/repos/user.repo'
 import { Transaction } from '../../../domain/entities/Transaction'
+import { ITransactionRepository } from '../../../domain/repos/transaction.repo'
 import { AddTransactionDTO } from './AddTransactionDTO'
 
 export class AddTransactionUseCase {
   constructor(
     private readonly accountRepository: IAccountRepository,
-    private readonly userRepository: IUserRepository
+    private readonly userRepository: IUserRepository,
+    private readonly transactionRepository: ITransactionRepository
   ) {}
 
   async exec(
@@ -59,6 +61,14 @@ export class AddTransactionUseCase {
     if (result.isFailure) {
       return Result.fail<Transaction>(result.getErrorValue() as string)
     }
+
+    const savedOrError = await this.transactionRepository.save(transaction)
+
+    if (savedOrError.isFailure) {
+      return Result.fail<Transaction>(savedOrError.getErrorValue() as string)
+    }
+
+    this.accountRepository.update(account)
 
     return Result.ok<Transaction>(transaction)
   }
