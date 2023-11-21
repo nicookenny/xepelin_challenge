@@ -11,7 +11,7 @@
 1. Clona el repositorio:
 
 ```bash
-git clone [URL_DEL_REPOSITORIO]
+git clone https://github.com/nicookenny/xepelin_challenge
 cd xepelin-challenge
 ```
 
