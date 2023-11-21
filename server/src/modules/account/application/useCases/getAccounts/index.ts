@@ -4,7 +4,7 @@ import { AccountRepository } from '../../../infra/db/account.repo'
 import { GetAccountsController } from './getAccounts.controller'
 import { GetAccountsUseCase } from './getAccounts.uc'
 
-const repo = new AccountRepository()
+const repo = AccountRepository.getInstance()
 
 const useCase = new GetAccountsUseCase(repo)
 

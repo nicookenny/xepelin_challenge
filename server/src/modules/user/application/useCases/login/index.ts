@@ -6,7 +6,7 @@ import { LoginController } from './Login.controller'
 import { LoginUseCase } from './Login.uc'
 
 const auth = new AuthService()
-const repo = new UserRepository()
+const repo = UserRepository.getInstance()
 const useCase = new LoginUseCase(repo, auth)
 const controller = new LoginController(useCase)
 
